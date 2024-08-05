@@ -1,0 +1,31 @@
+{
+  "name": "uspace-api-wrapper",
+  "version": "1.0.0",
+  "description": "Simple API Wrapper for the University of Vienna",
+  "main": "dist/UspaceClient.js",
+  "types": "dist/UspaceClient.d.ts",
+  
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eliaskounakas/uspace-api-wrapper.git"
+  },
+  "keywords": [
+    "API",
+    "University",
+    "Vienna"
+  ],
+  "author": "Elias Kounakas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eliaskounakas/uspace-api-wrapper/issues"
+  },
+  "homepage": "https://github.com/eliaskounakas/uspace-api-wrapper#readme",
+  "devDependencies": {
+    "@types/node": "^22.1.0",
+    "typescript": "^5.5.4"
+  }
+}
