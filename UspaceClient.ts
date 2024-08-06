@@ -8,8 +8,12 @@ export default class UspaceClient {
     this.#session = session;
   }
 
-  get getSession() {
+  get getSession(): string {
     return this.#session;
+  }
+
+  set setSession(session: string) {
+    this.#session = session;
   }
 
   async login(username: string, password: string): Promise<void> {

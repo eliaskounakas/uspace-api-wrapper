@@ -34,6 +34,9 @@ class UspaceClient {
     get getSession() {
         return __classPrivateFieldGet(this, _UspaceClient_session, "f");
     }
+    set setSession(session) {
+        __classPrivateFieldSet(this, _UspaceClient_session, session, "f");
+    }
     login(username, password) {
         return __awaiter(this, void 0, void 0, function* () {
             const sessionResponse = yield fetch(UspaceRequest_1.default.sessionURL);
@@ -77,3 +80,4 @@ class UspaceClient {
 }
 _UspaceClient_session = new WeakMap();
 exports.default = UspaceClient;
+//# sourceMappingURL=UspaceClient.js.map

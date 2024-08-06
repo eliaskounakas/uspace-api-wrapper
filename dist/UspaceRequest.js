@@ -49,3 +49,4 @@ UspaceRequest.sessionURL = "https://uspace.univie.ac.at/web/gast";
 UspaceRequest.loginURL = "https://uspace.univie.ac.at/web/gast/login?p_p_id=ssploginportlet_WAR_ssploginportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=login&p_p_cacheability=cacheLevelPage";
 UspaceRequest.coursesURL = "https://uspace.univie.ac.at/web/studium/anmeldeuebersicht?p_p_id=asstudierendeanmeldeuebersichtportlet_WAR_asstudierendeanmeldeuebersichtportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=_generic_request_&p_p_cacheability=cacheLevelPage";
 exports.default = UspaceRequest;
+//# sourceMappingURL=UspaceRequest.js.map
