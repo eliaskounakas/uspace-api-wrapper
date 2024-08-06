@@ -1,5 +1,5 @@
 ## Introduction
-This API is designed to make interacting with University of Vienna's platform uspace easier.
+An API is designed to make interacting with University of Vienna's platform uspace easier.
 
 ## Installation
 To use this package, simply run:
