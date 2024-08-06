@@ -1,5 +1,5 @@
 ## Introduction
-An API wrapper designed to make interacting with University of Vienna's platform uspace easier.
+An API wrapper designed to make interacting with University of Vienna's platform u:space easier.
 
 ## Installation
 To use this package, simply run:
