@@ -1,5 +1,6 @@
 import CookieHandler from "./CookieHandler";
 import UspaceRequest from "./UspaceRequest";
+import type { CourseData } from "./entities";
 
 export default class UspaceClient {
   #session: string;
@@ -44,7 +45,7 @@ export default class UspaceClient {
     this.#session = cookieHandler.getCookies;
   }
 
-  async getCourses(year: number, isWinterSemester: boolean): Promise<unknown> {
+  async getCourses(year: number, isWinterSemester: boolean): Promise<CourseData[]> {
     if (this.#session === "") {
       throw new Error("Invalid session, try logging in.");
     }
