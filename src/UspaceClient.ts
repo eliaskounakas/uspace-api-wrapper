@@ -17,12 +17,11 @@ export default class UspaceClient {
     this.#session = session;
   }
 
-  async login(username: string, password: string): Promise<void> {
+  async login(username: string, password: string): Promise<Response> {
     const sessionResponse: Response = await fetch(UspaceRequest.sessionURL);
     if (!sessionResponse.ok) {
-      throw new Error("Could not reach uspace!");
+      return new Response('Could not reach u:space server!', { status: 503 });
     }
-
     const sessionCookies: string = String(
       sessionResponse.headers.get("set-cookie"),
     );
@@ -35,17 +34,20 @@ export default class UspaceClient {
       { user: username, password: password },
     );
     const loginResponse: Response = await loginRequest.send();
+    const isLoginSuccessful: boolean = (await loginResponse.json())['errors'] === null;
 
-    if (!loginResponse.ok) {
-      throw new Error("Invalid username/password!");
+    if (!isLoginSuccessful) {
+      return new Response('Invalid credentials', { status: 401 });
     }
     const loginCookies: string = String(loginResponse.headers.get("set-cookie"));
     cookieHandler.mergeCookies(loginCookies);
 
     this.#session = cookieHandler.getCookies;
+
+    return new Response('Successfully logged in!', { status: 200 });
   }
 
-  async getCourses(year: number, isWinterSemester: boolean): Promise<CourseData[]> {
+  async getCourses(year: number, isWinterSemester: boolean): Promise<Response> {
     if (this.#session === "") {
       throw new Error("Invalid session, try logging in.");
     }
@@ -68,10 +70,10 @@ export default class UspaceClient {
     const coursesResponse: Response = await coursesRequest.send();
 
     if (!coursesResponse.ok) {
-      throw new Error ("Could not retrieve courses! Session may have expired!");
+      return new Response('Could not fetch courses, session may have expired.', { status: 403 });
     }
   
     const courses = await coursesResponse.json();
-    return courses;
+    return new Response(JSON.stringify(courses), { status: 200 });
   }
 }

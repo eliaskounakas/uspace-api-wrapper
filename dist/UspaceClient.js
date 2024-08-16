@@ -41,18 +41,20 @@ class UspaceClient {
         return __awaiter(this, void 0, void 0, function* () {
             const sessionResponse = yield fetch(UspaceRequest_1.default.sessionURL);
             if (!sessionResponse.ok) {
-                throw new Error("Could not reach uspace!");
+                return new Response('Could not reach u:space server!', { status: 503 });
             }
             const sessionCookies = String(sessionResponse.headers.get("set-cookie"));
             const cookieHandler = new CookieHandler_1.default(sessionCookies);
             const loginRequest = new UspaceRequest_1.default(UspaceRequest_1.default.loginURL, "POST", cookieHandler.getCookies, { user: username, password: password });
             const loginResponse = yield loginRequest.send();
-            if (!loginResponse.ok) {
-                throw new Error("Invalid username/password!");
+            const isLoginSuccessful = (yield loginResponse.json())['errors'] === null;
+            if (!isLoginSuccessful) {
+                return new Response('Invalid credentials', { status: 401 });
             }
             const loginCookies = String(loginResponse.headers.get("set-cookie"));
             cookieHandler.mergeCookies(loginCookies);
             __classPrivateFieldSet(this, _UspaceClient_session, cookieHandler.getCookies, "f");
+            return new Response('Successfully logged in!', { status: 200 });
         });
     }
     getCourses(year, isWinterSemester) {
@@ -71,10 +73,10 @@ class UspaceClient {
             const coursesRequest = new UspaceRequest_1.default(UspaceRequest_1.default.coursesURL, "POST", this.getSession, coursesBody);
             const coursesResponse = yield coursesRequest.send();
             if (!coursesResponse.ok) {
-                throw new Error("Could not retrieve courses! Session may have expired!");
+                return new Response('Could not fetch courses, session may have expired.', { status: 403 });
             }
             const courses = yield coursesResponse.json();
-            return courses;
+            return new Response(JSON.stringify(courses), { status: 200 });
         });
     }
 }
