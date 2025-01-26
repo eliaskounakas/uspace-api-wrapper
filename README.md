@@ -20,3 +20,5 @@ const myCourses = await uspaceClient.getCourses(2024, false);
 
 console.log(myCourses);
 ```
+
+might still work but is not maintained anymore
